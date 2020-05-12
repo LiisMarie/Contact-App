@@ -7,20 +7,110 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Contact View Controller-->
         <scene sceneID="QDj-Sg-dYl">
             <objects>
-                <viewController id="FxP-T7-WsT" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ContactViewController" id="FxP-T7-WsT" customClass="ContactViewController" customModule="CoreDataDemo" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="AHr-Bp-hg7">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="97" translatesAutoresizingMaskIntoConstraints="NO" id="NVn-cx-R45">
+                                <rect key="frame" x="8" y="96" width="398" height="36"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NJD-h2-trN">
+                                        <rect key="frame" x="0.0" y="0.0" width="68" height="36"/>
+                                        <color key="backgroundColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" title="Delete"/>
+                                        <connections>
+                                            <action selector="deleteContactTouchUpInside:" destination="FxP-T7-WsT" eventType="touchUpInside" id="Uv1-kI-9e4"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rXv-xL-zRK">
+                                        <rect key="frame" x="165" y="0.0" width="68" height="36"/>
+                                        <color key="backgroundColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" title="Edit"/>
+                                        <connections>
+                                            <action selector="editContactTouchUpInside:" destination="FxP-T7-WsT" eventType="touchUpInside" id="mId-DV-Szw"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K4e-E7-fOy">
+                                        <rect key="frame" x="330" y="0.0" width="68" height="36"/>
+                                        <color key="backgroundColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" title="Add"/>
+                                        <connections>
+                                            <action selector="addContactTouchUpInside:" destination="FxP-T7-WsT" eventType="touchUpInside" id="KbD-Df-tFE"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="mhd-1c-hjk">
+                                <rect key="frame" x="8" y="148" width="398" height="722"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ContactTableViewCell" rowHeight="60" id="Wra-FY-VcT" customClass="ContactTableViewCell" customModule="CoreDataDemo" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="398" height="60"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Wra-FY-VcT" id="SXr-rz-UBR">
+                                            <rect key="frame" x="0.0" y="0.0" width="398" height="60"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="4ug-R9-N8q">
+                                                    <rect key="frame" x="8" y="8" width="44" height="44"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="4ug-R9-N8q" secondAttribute="height" multiplier="1:1" id="Zq9-Tt-5BV"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Value" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wd9-fF-C3I">
+                                                    <rect key="frame" x="68" y="8" width="42" height="44"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="wd9-fF-C3I" secondAttribute="bottom" constant="8" id="P4n-Ee-2Ui"/>
+                                                <constraint firstItem="4ug-R9-N8q" firstAttribute="leading" secondItem="SXr-rz-UBR" secondAttribute="leading" constant="8" id="PTE-gs-vPu"/>
+                                                <constraint firstItem="wd9-fF-C3I" firstAttribute="top" secondItem="SXr-rz-UBR" secondAttribute="top" constant="8" id="SCr-Jq-6nV"/>
+                                                <constraint firstAttribute="bottom" secondItem="4ug-R9-N8q" secondAttribute="bottom" constant="8" id="TlF-9n-6js"/>
+                                                <constraint firstItem="wd9-fF-C3I" firstAttribute="leading" secondItem="4ug-R9-N8q" secondAttribute="trailing" constant="16" id="Ydk-F0-hv1"/>
+                                                <constraint firstItem="4ug-R9-N8q" firstAttribute="top" secondItem="SXr-rz-UBR" secondAttribute="top" constant="8" id="eDy-iR-xnK"/>
+                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="wd9-fF-C3I" secondAttribute="trailing" constant="8" id="tnr-bg-baG"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="icon" destination="4ug-R9-N8q" id="Y4Z-dh-Qba"/>
+                                            <outlet property="value" destination="wd9-fF-C3I" id="k2O-NB-mn3"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="aU0-Ba-vJa" firstAttribute="trailing" secondItem="mhd-1c-hjk" secondAttribute="trailing" constant="8" id="CxF-jE-jFh"/>
+                            <constraint firstItem="mhd-1c-hjk" firstAttribute="bottom" secondItem="aU0-Ba-vJa" secondAttribute="bottom" constant="8" id="LrN-BR-O4w"/>
+                            <constraint firstItem="mhd-1c-hjk" firstAttribute="leading" secondItem="aU0-Ba-vJa" secondAttribute="leading" constant="8" id="UCS-0n-Pkk"/>
+                            <constraint firstItem="aU0-Ba-vJa" firstAttribute="trailing" secondItem="NVn-cx-R45" secondAttribute="trailing" constant="8" id="ean-mv-ebL"/>
+                            <constraint firstItem="mhd-1c-hjk" firstAttribute="top" secondItem="NVn-cx-R45" secondAttribute="bottom" constant="16" id="fvP-nY-yU7"/>
+                            <constraint firstItem="NVn-cx-R45" firstAttribute="leading" secondItem="aU0-Ba-vJa" secondAttribute="leading" constant="8" id="niI-qH-ji6"/>
+                            <constraint firstItem="NVn-cx-R45" firstAttribute="top" secondItem="aU0-Ba-vJa" secondAttribute="top" constant="8" id="z0j-Wy-ilD"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="aU0-Ba-vJa"/>
                     </view>
+                    <connections>
+                        <outlet property="tableView" destination="mhd-1c-hjk" id="L7n-GL-dTM"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ov3-rF-rhJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="129" y="111"/>
+            <point key="canvasLocation" x="128.98550724637681" y="110.49107142857143"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="HtY-Nl-xXR">

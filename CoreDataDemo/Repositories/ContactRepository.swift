@@ -31,6 +31,18 @@ class ContactRepository {
         return contacts
     }
     
+    func getByPerson(person: Person) throws -> [Contact] {
+        let request = NSFetchRequest<Contact>(entityName: String(describing: Contact.self))
+        let contacts = try context.fetch(request)
+        var contactsForPerson = [Contact]()
+        for contact in contacts {
+            if (contact.person == person) {
+                contactsForPerson.append(contact)
+            }
+        }
+        return contactsForPerson
+    }
+    
     func update(contacts: Contact) throws {
         try context.save()
     }

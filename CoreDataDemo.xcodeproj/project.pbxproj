@@ -25,6 +25,8 @@
 		23BA48542469CA25004E4F1A /* PersonRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23BA48532469CA25004E4F1A /* PersonRepository.swift */; };
 		23F3D260246A830C007FCF57 /* PrimarySplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23F3D25F246A830C007FCF57 /* PrimarySplitViewController.swift */; };
 		23F3D262246A8C52007FCF57 /* PersonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23F3D261246A8C52007FCF57 /* PersonTableViewCell.swift */; };
+		23F3D264246A9657007FCF57 /* ContactTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23F3D263246A9657007FCF57 /* ContactTableViewCell.swift */; };
+		23F3D267246AA30C007FCF57 /* ContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23F3D265246A978A007FCF57 /* ContactViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +50,8 @@
 		23BA48532469CA25004E4F1A /* PersonRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonRepository.swift; sourceTree = "<group>"; };
 		23F3D25F246A830C007FCF57 /* PrimarySplitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimarySplitViewController.swift; sourceTree = "<group>"; };
 		23F3D261246A8C52007FCF57 /* PersonTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonTableViewCell.swift; sourceTree = "<group>"; };
+		23F3D263246A9657007FCF57 /* ContactTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactTableViewCell.swift; sourceTree = "<group>"; };
+		23F3D265246A978A007FCF57 /* ContactViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,6 +96,8 @@
 				23BA482C2469BFC7004E4F1A /* CoreDataDemo.xcdatamodeld */,
 				23F3D25F246A830C007FCF57 /* PrimarySplitViewController.swift */,
 				23F3D261246A8C52007FCF57 /* PersonTableViewCell.swift */,
+				23F3D263246A9657007FCF57 /* ContactTableViewCell.swift */,
+				23F3D265246A978A007FCF57 /* ContactViewController.swift */,
 			);
 			path = CoreDataDemo;
 			sourceTree = "<group>";
@@ -194,7 +200,9 @@
 				23BA48542469CA25004E4F1A /* PersonRepository.swift in Sources */,
 				23BA484D2469C96B004E4F1A /* ContactType+CoreDataProperties.swift in Sources */,
 				23BA484E2469C96B004E4F1A /* Contact+CoreDataClass.swift in Sources */,
+				23F3D267246AA30C007FCF57 /* ContactViewController.swift in Sources */,
 				23F3D262246A8C52007FCF57 /* PersonTableViewCell.swift in Sources */,
+				23F3D264246A9657007FCF57 /* ContactTableViewCell.swift in Sources */,
 				23BA484C2469C96B004E4F1A /* ContactType+CoreDataClass.swift in Sources */,
 				23702F5D2469EC7900AB8025 /* ContactTypeRepository.swift in Sources */,
 				23BA48282469BFC7004E4F1A /* ViewController.swift in Sources */,

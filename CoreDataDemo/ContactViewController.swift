@@ -1,15 +1,17 @@
 //
-//  ViewController.swift
+//  ContactViewController.swift
 //  CoreDataDemo
 //
-//  Created by Liis on 11.05.2020.
+//  Created by Liis on 12.05.2020.
 //  Copyright © 2020 Liis. All rights reserved.
 //
 
 import UIKit
 import CoreData
 
-class ViewController: UIViewController {
+class ContactViewController: UIViewController {
+    
+    @IBOutlet weak var tableView: UITableView!
     
     var container: NSPersistentContainer!
     
@@ -17,9 +19,11 @@ class ViewController: UIViewController {
     var contactRepo: ContactRepository!
     var contactTypeRepo: ContactTypeRepository!
     
-    @IBOutlet weak var tableView: UITableView!
+    var fetchControllerPerson: NSFetchedResultsController<Person>?
+    var fetchControllerContact: NSFetchedResultsController<Contact>?
+    var fetchControllerContactType: NSFetchedResultsController<ContactType>?
     
-    var fetchController: NSFetchedResultsController<Person>?
+    var person = Person()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,24 +31,45 @@ class ViewController: UIViewController {
         
         container = AppDelegate.persistentContainer
         
+        self.title = "\(person.firstName!) \(person.lastName!)"
+        
         personRepo = PersonRepository(container: container)
         contactRepo = ContactRepository(container: container)
         contactTypeRepo = ContactTypeRepository(container: container)
         
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "ContactTableViewCell")
         tableView.tableFooterView = UIView()
         tableView.dataSource = self
         tableView.delegate = self
         
-        let request = NSFetchRequest<Person>(entityName: String(describing: Person.self))
+        /*let request = NSFetchRequest<Person>(entityName: String(describing: Person.self))
         request.sortDescriptors = [NSSortDescriptor(key: "firstName", ascending: true)]
         fetchController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: container.viewContext, sectionNameKeyPath: nil, cacheName: nil)
         
         fetchController!.delegate = self
         
-        try? fetchController!.performFetch()
+        try? fetchController!.performFetch()*/
         
-        initContactTypes()
+        let requestContact = NSFetchRequest<Contact>(entityName: String(describing: Contact.self))
+        requestContact.sortDescriptors = [NSSortDescriptor(key: "value", ascending: true)]
+        fetchControllerContact = NSFetchedResultsController(fetchRequest: requestContact, managedObjectContext: container.viewContext, sectionNameKeyPath: nil, cacheName: nil)
+        fetchControllerContact!.delegate = self
+        try? fetchControllerContact!.performFetch()
+        
+        let requestPerson = NSFetchRequest<Person>(entityName: String(describing: Person.self))
+        requestPerson.sortDescriptors = [NSSortDescriptor(key: "firstName", ascending: true)]
+        fetchControllerPerson = NSFetchedResultsController(fetchRequest: requestPerson, managedObjectContext: container.viewContext, sectionNameKeyPath: nil, cacheName: nil)
+        fetchControllerPerson!.delegate = self
+        try? fetchControllerPerson!.performFetch()
+        
+        let requestContactType = NSFetchRequest<ContactType>(entityName: String(describing: ContactType.self))
+        requestContactType.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
+        fetchControllerContactType = NSFetchedResultsController(fetchRequest: requestContactType, managedObjectContext: container.viewContext, sectionNameKeyPath: nil, cacheName: nil)
+        fetchControllerContactType!.delegate = self
+        try? fetchControllerContactType!.performFetch()
+        
+
         /*
         do {
             /*let newPerson = Person(context: self.personRepo.context)
@@ -62,26 +87,7 @@ class ViewController: UIViewController {
         }*/
     }
     
-    func initContactTypes() {
-        do {
-            let result = try contactTypeRepo.all()
-            if (result.count == 0) {
-                print("initContactTypes")
-                let types = ["Phone", "Email", "Address", "Website"]
-                for type in types {
-                    print(type)
-                    let newContactType = ContactType(context: self.contactTypeRepo.context)
-                    newContactType.name = type
-                    try contactTypeRepo.insert(contactType: newContactType)
-                }
-            } else {
-                print(result)
-            }
-        } catch {
-            print("Failed to initContactTypes()!")
-        }
-    }
-    
+    /*
     @IBAction func addPersonTouchUpInside(_ sender: Any) {
         let alertController = UIAlertController(title: "New user", message: "", preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
@@ -106,53 +112,56 @@ class ViewController: UIViewController {
         }
         
         self.present(alertController, animated: true, completion: nil)
+    }*/
+    
+    
+    @IBAction func addContactTouchUpInside(_ sender: Any) {
     }
+    
+    @IBAction func editContactTouchUpInside(_ sender: Any) {
+    }
+    
+    @IBAction func deleteContactTouchUpInside(_ sender: Any) {
+    }
+    
 }
 
-extension ViewController: UITableViewDataSource {
+extension ContactViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.fetchController?.fetchedObjects?.count ?? 0
+        return self.fetchControllerContact?.fetchedObjects?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = self.tableView.dequeueReusableCell(withIdentifier: "PersonTableViewCell", for: indexPath) as! PersonTableViewCell
-        guard let person = self.fetchController?.object(at: indexPath) else {
+        let cell = self.tableView.dequeueReusableCell(withIdentifier: "ContactTableViewCell", for: indexPath) as! ContactTableViewCell
+        guard let contact = self.fetchControllerContact?.object(at: indexPath) else {
             return cell
         }
         
+        
         cell.selectionStyle = .none
-        //cell.textLabel?.text = "\(person.firstName!) \(person.lastName!)"
-        cell.name?.text = "\(person.firstName!) \(person.lastName!)"
-        cell.contactsCount?.text = "0"
+        cell.value?.text = "\(contact.value!)"
+        // todo setting image too
         
         return cell
     }
     
+    
 }
 
-extension ViewController: UITableViewDelegate {
+extension ContactViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         true
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if (editingStyle == .delete) {
-            guard let person = self.fetchController?.object(at: indexPath) else {return}
-            try? personRepo.delete(person: person)
+            guard let contact = self.fetchControllerContact?.object(at: indexPath) else {return}
+            try? contactRepo.delete(contacts: contact)
         }
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let vc = storyboard?.instantiateViewController(withIdentifier: "ContactViewController") as? ContactViewController
-        let person = (self.fetchController?.object(at: indexPath))
-        if (person != nil) {
-            vc?.person = person!
-        }
-        self.navigationController?.pushViewController(vc!, animated: true)
     }
 }
 
-extension ViewController: NSFetchedResultsControllerDelegate {
+extension ContactViewController: NSFetchedResultsControllerDelegate {
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
         switch type {
         case .delete:
