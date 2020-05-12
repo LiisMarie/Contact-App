@@ -21,11 +21,14 @@ class ContactRepository {
     }
     
     func insert(contact: Contact) throws {
+        print("trying to insert")
         context.insert(contact)
         try context.save()
+        print("tryng to insert successful")
     }
     
     func all() throws -> [Contact] {
+        print("getting all contacts")
         let request = NSFetchRequest<Contact>(entityName: String(describing: Contact.self))
         let contacts = try context.fetch(request)
         return contacts

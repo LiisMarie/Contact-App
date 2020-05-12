@@ -9,7 +9,8 @@
 import UIKit
 import CoreData
 
-class ContactViewController: UIViewController {
+class ContactViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
+    
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -22,6 +23,10 @@ class ContactViewController: UIViewController {
     var fetchControllerPerson: NSFetchedResultsController<Person>?
     var fetchControllerContact: NSFetchedResultsController<Contact>?
     var fetchControllerContactType: NSFetchedResultsController<ContactType>?
+    
+    var contactTypes = [String]()
+    
+    var selectedRow: Int = 0
     
     var person = Person()
     
@@ -68,35 +73,83 @@ class ContactViewController: UIViewController {
         fetchControllerContactType = NSFetchedResultsController(fetchRequest: requestContactType, managedObjectContext: container.viewContext, sectionNameKeyPath: nil, cacheName: nil)
         fetchControllerContactType!.delegate = self
         try? fetchControllerContactType!.performFetch()
-        
+        /*
+        do {
+            
+            let contactTypesList = try contactTypeRepo.all()
+            let contact = Contact(context: self.contactRepo.context)
+            contact.value = "122"
+            contact.person = self.person
+            contact.contactType = contactTypesList[0]
+            try? self.contactRepo.insert(contact: contact)
+            
+            
+            print("displayed all contacts")
+        } catch {
+            print("Failed!")
+        }*/
     }
     
     
     @IBAction func addContactTouchUpInside(_ sender: Any) {
-        let alertController = UIAlertController(title: "Add contact for \(self.person.firstName!) \(self.person.lastName!)", message: "", preferredStyle: .alert)
+        self.selectedRow = 0
+        contactTypes = [String]()
+        
+        var contactTypesList = [ContactType]()
+        do {
+            contactTypesList = try contactTypeRepo.all()
+            for contactType in contactTypesList {
+                contactTypes.append(contactType.name!)
+            }
+        } catch {
+            return
+        }
+    
+        let alertController = UIAlertController(title: "Add contact for \(self.person.firstName!) \(self.person.lastName!)", message: "\n\n\n\n\n", preferredStyle: .alert)
+
+        let pickerView = UIPickerView(frame: CGRect(x: 5, y: 20, width: 250, height: 140))
+        
+        alertController.view.addSubview(pickerView)
+        pickerView.delegate = self
+        pickerView.dataSource = self
+        
+        //alertController.setValue(vc, forKey: "ContactViewController")
+        
         alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         alertController.addAction(UIAlertAction(title: "Add", style: .default, handler: {_ in
-            /*
-            let person = Person(context: self.personRepo.context)
-            person.firstName = alertController.textFields?[0].text
-            person.lastName = alertController.textFields?[1].text
-            do {
-                try person.validateForInsert()
-                print("passed validation")
-                try? self.personRepo.insert(person: person)
-            } catch {
-                let error = error as NSError
-                print(error)
-            }*/
+            print("\(self.selectedRow)")
+            
+            let contact = Contact(context: self.contactRepo.context)
+            contact.value = alertController.textFields?[0].text
+            contact.person = self.person
+            contact.contactType = contactTypesList[self.selectedRow]
+            print("before insertion")
+            try? self.contactRepo.insert(contact: contact)
+            print("after insertion")
+
         }))
+        
         alertController.addTextField { textField in
             textField.placeholder = "Value"
         }
-        alertController.addTextField { textField in
-            textField.placeholder = "Last name"
-        }
         
         self.present(alertController, animated: true, completion: nil)
+    }
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return self.contactTypes.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return self.contactTypes[row]
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        self.selectedRow = row
     }
     
 }
