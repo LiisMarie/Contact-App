@@ -91,6 +91,7 @@ class ViewController: UIViewController {
             person.lastName = alertController.textFields?[1].text
             do {
                 try person.validateForInsert()
+                print("passed validation")
                 try? self.personRepo.insert(person: person)
             } catch {
                 let error = error as NSError
@@ -114,13 +115,15 @@ extension ViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = self.tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        let cell = self.tableView.dequeueReusableCell(withIdentifier: "PersonTableViewCell", for: indexPath) as! PersonTableViewCell
         guard let person = self.fetchController?.object(at: indexPath) else {
             return cell
         }
         
         cell.selectionStyle = .none
-        cell.textLabel?.text = "\(person.firstName!) \(person.lastName!)"
+        //cell.textLabel?.text = "\(person.firstName!) \(person.lastName!)"
+        cell.name?.text = "\(person.firstName!) \(person.lastName!)"
+        cell.contactsCount?.text = "0"
         
         return cell
     }
