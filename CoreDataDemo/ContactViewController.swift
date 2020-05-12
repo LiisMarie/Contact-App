@@ -20,15 +20,15 @@ class ContactViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     var contactRepo: ContactRepository!
     var contactTypeRepo: ContactTypeRepository!
     
-    var fetchControllerPerson: NSFetchedResultsController<Person>?
-    var fetchControllerContact: NSFetchedResultsController<Contact>?
-    var fetchControllerContactType: NSFetchedResultsController<ContactType>?
+    var fetchController: NSFetchedResultsController<Contact>?
+
+    var pickerItems = [String]()
     
-    var contactTypes = [String]()
+    var pickerSelectedRow: Int?
     
-    var selectedRow: Int = 0
+    var person : Person?
+    var contactType: ContactType?
     
-    var person = Person()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,96 +36,65 @@ class ContactViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         
         container = AppDelegate.persistentContainer
         
-        self.title = "\(person.firstName!) \(person.lastName!)"
+        self.title = "\(person!.firstName!) \(person!.lastName!)"
         
         personRepo = PersonRepository(container: container)
         contactRepo = ContactRepository(container: container)
         contactTypeRepo = ContactTypeRepository(container: container)
         
-        
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "ContactTableViewCell")
         tableView.tableFooterView = UIView()
         tableView.dataSource = self
         tableView.delegate = self
         
-        /*let request = NSFetchRequest<Person>(entityName: String(describing: Person.self))
-        request.sortDescriptors = [NSSortDescriptor(key: "firstName", ascending: true)]
-        fetchController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: container.viewContext, sectionNameKeyPath: nil, cacheName: nil)
-        
-        fetchController!.delegate = self
-        
-        try? fetchController!.performFetch()*/
-        
         let requestContact = NSFetchRequest<Contact>(entityName: String(describing: Contact.self))
         requestContact.sortDescriptors = [NSSortDescriptor(key: "value", ascending: true)]
-        fetchControllerContact = NSFetchedResultsController(fetchRequest: requestContact, managedObjectContext: container.viewContext, sectionNameKeyPath: nil, cacheName: nil)
-        fetchControllerContact!.delegate = self
-        try? fetchControllerContact!.performFetch()
-        
-        let requestPerson = NSFetchRequest<Person>(entityName: String(describing: Person.self))
-        requestPerson.sortDescriptors = [NSSortDescriptor(key: "firstName", ascending: true)]
-        fetchControllerPerson = NSFetchedResultsController(fetchRequest: requestPerson, managedObjectContext: container.viewContext, sectionNameKeyPath: nil, cacheName: nil)
-        fetchControllerPerson!.delegate = self
-        try? fetchControllerPerson!.performFetch()
-        
-        let requestContactType = NSFetchRequest<ContactType>(entityName: String(describing: ContactType.self))
-        requestContactType.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
-        fetchControllerContactType = NSFetchedResultsController(fetchRequest: requestContactType, managedObjectContext: container.viewContext, sectionNameKeyPath: nil, cacheName: nil)
-        fetchControllerContactType!.delegate = self
-        try? fetchControllerContactType!.performFetch()
-        /*
-        do {
-            
-            let contactTypesList = try contactTypeRepo.all()
-            let contact = Contact(context: self.contactRepo.context)
-            contact.value = "122"
-            contact.person = self.person
-            contact.contactType = contactTypesList[0]
-            try? self.contactRepo.insert(contact: contact)
-            
-            
-            print("displayed all contacts")
-        } catch {
-            print("Failed!")
-        }*/
+        if (person != nil) {
+            requestContact.predicate = NSPredicate(format: "person = %@", person!)
+        }
+        if (contactType != nil) {
+            requestContact.predicate = NSPredicate(format: "contactType = %@", contactType!)
+        }
+        fetchController = NSFetchedResultsController(fetchRequest: requestContact, managedObjectContext: container.viewContext, sectionNameKeyPath: nil, cacheName: nil)
+        fetchController!.delegate = self
+        try? fetchController!.performFetch()
     }
     
     
     @IBAction func addContactTouchUpInside(_ sender: Any) {
-        self.selectedRow = 0
-        contactTypes = [String]()
+        self.pickerSelectedRow = 0
+        pickerItems = [String]()
         
-        var contactTypesList = [ContactType]()
+        var alertTitle = ""
         do {
-            contactTypesList = try contactTypeRepo.all()
-            for contactType in contactTypesList {
-                contactTypes.append(contactType.name!)
+            if person != nil {
+                alertTitle = person!.firstName! + " " + person!.lastName!
+                for contactType in try contactTypeRepo.all() {
+                    pickerItems.append(contactType.name!)
+                }
+            }
+            if contactType != nil {
+                alertTitle = contactType!.name!
+                for person in try personRepo.all() {
+                    pickerItems.append(person.firstName! + " " + person.lastName!)
+                }
             }
         } catch {
             return
         }
     
-        let alertController = UIAlertController(title: "Add contact for \(self.person.firstName!) \(self.person.lastName!)", message: "\n\n\n\n\n", preferredStyle: .alert)
+        let alertController = UIAlertController(title: "Add contact for " + alertTitle, message: "\n\n\n\n\n", preferredStyle: .alert)
 
         let pickerView = UIPickerView(frame: CGRect(x: 5, y: 20, width: 250, height: 140))
         
         alertController.view.addSubview(pickerView)
         pickerView.delegate = self
         pickerView.dataSource = self
-        
-        //alertController.setValue(vc, forKey: "ContactViewController")
-        
+                
         alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         alertController.addAction(UIAlertAction(title: "Add", style: .default, handler: {_ in
-            print("\(self.selectedRow)")
+            print("\(self.pickerSelectedRow!)")
             
-            let contact = Contact(context: self.contactRepo.context)
-            contact.value = alertController.textFields?[0].text
-            contact.person = self.person
-            contact.contactType = contactTypesList[self.selectedRow]
-            print("before insertion")
-            try? self.contactRepo.insert(contact: contact)
-            print("after insertion")
+            self.addNewContact(contactValue: alertController.textFields![0].text!)
 
         }))
         
@@ -136,38 +105,58 @@ class ContactViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         self.present(alertController, animated: true, completion: nil)
     }
     
+    func addNewContact(contactValue: String) {
+        var _person : Person!
+        var _contactType : ContactType!
+        if person == nil {
+            _contactType = contactType!
+            _person = try! personRepo.all()[pickerSelectedRow!]
+        }
+        if contactType == nil {
+            _person = person!
+            _contactType = try! contactTypeRepo.all()[pickerSelectedRow!]
+        }
+        
+        let contact = Contact(context: self.contactRepo.context)
+        contact.contactType = _contactType
+        contact.person = _person
+        contact.value = contactValue
+        try! contactRepo.insert(contact: contact)
+    }
+    
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return self.contactTypes.count
+        return self.pickerItems.count
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return self.contactTypes[row]
+        return self.pickerItems[row]
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        self.selectedRow = row
+        self.pickerSelectedRow = row
     }
     
 }
 
 extension ContactViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.fetchControllerContact?.fetchedObjects?.count ?? 0
+        return self.fetchController?.fetchedObjects?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = self.tableView.dequeueReusableCell(withIdentifier: "ContactTableViewCell", for: indexPath) as! ContactTableViewCell
-        guard let contact = self.fetchControllerContact?.object(at: indexPath) else {
+        guard let contact = self.fetchController?.object(at: indexPath) else {
             return cell
         }
         
         cell.selectionStyle = .none
         cell.value?.text = "\(contact.value!)"
         // todo setting image too
+        cell.imageView?.image = UIImage(named: (contact.contactType?.name!)!)
         
         return cell
     }
@@ -182,7 +171,7 @@ extension ContactViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if (editingStyle == .delete) {
-            guard let contact = self.fetchControllerContact?.object(at: indexPath) else {return}
+            guard let contact = self.fetchController?.object(at: indexPath) else {return}
             try? contactRepo.delete(contacts: contact)
         }
     }

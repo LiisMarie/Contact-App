@@ -2,21 +2,21 @@
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="16119" systemVersion="19D76" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Contact" representedClassName="Contact" syncable="YES">
         <attribute name="value" attributeType="String" minValueString="1" maxValueString="32"/>
-        <relationship name="contactType" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ContactType" inverseName="contacts" inverseEntity="ContactType"/>
+        <relationship name="contactType" maxCount="1" deletionRule="Nullify" destinationEntity="ContactType" inverseName="contacts" inverseEntity="ContactType"/>
         <relationship name="person" maxCount="1" deletionRule="Nullify" destinationEntity="Person" inverseName="contacts" inverseEntity="Person"/>
     </entity>
     <entity name="ContactType" representedClassName="ContactType" syncable="YES">
         <attribute name="name" attributeType="String" minValueString="1" maxValueString="32"/>
-        <relationship name="contacts" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Contact" inverseName="contactType" inverseEntity="Contact"/>
+        <relationship name="contacts" toMany="YES" deletionRule="Cascade" destinationEntity="Contact" inverseName="contactType" inverseEntity="Contact"/>
     </entity>
     <entity name="Person" representedClassName="Person" syncable="YES">
         <attribute name="firstName" attributeType="String" minValueString="1" maxValueString="64"/>
         <attribute name="lastName" attributeType="String" minValueString="1" maxValueString="64"/>
-        <relationship name="contacts" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Contact" inverseName="person" inverseEntity="Contact"/>
+        <relationship name="contacts" toMany="YES" deletionRule="Cascade" destinationEntity="Contact" inverseName="person" inverseEntity="Contact"/>
     </entity>
     <elements>
-        <element name="Person" positionX="-101.98046875" positionY="-89" width="128" height="88"/>
         <element name="Contact" positionX="83.046875" positionY="-77" width="128" height="88"/>
         <element name="ContactType" positionX="298.00390625" positionY="-94.046875" width="128" height="73"/>
+        <element name="Person" positionX="-101.98046875" positionY="-89" width="128" height="88"/>
     </elements>
 </model>

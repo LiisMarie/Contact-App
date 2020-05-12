@@ -31,7 +31,6 @@ class ViewController: UIViewController {
         contactRepo = ContactRepository(container: container)
         contactTypeRepo = ContactTypeRepository(container: container)
         
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         tableView.tableFooterView = UIView()
         tableView.dataSource = self
         tableView.delegate = self
@@ -60,6 +59,7 @@ class ViewController: UIViewController {
         } catch {
             print("Failed!")
         }*/
+        
     }
     
     func initContactTypes() {
@@ -127,7 +127,9 @@ extension ViewController: UITableViewDataSource {
             let contacts = try contactRepo.all()
             var personContacts =  [Contact]()
             for contact in contacts {
-                personContacts.append(contact)
+                if contact.person == person {
+                    personContacts.append(contact)
+                }
             }
             if (personContacts.count == 0) {
                 cell.contactsCount?.text = "0 contacts"
@@ -201,6 +203,7 @@ extension ViewController: UITableViewDelegate {
         let person = (self.fetchController?.object(at: indexPath))
         if (person != nil) {
             vc?.person = person!
+            vc?.contactType = nil
         }
         self.navigationController?.pushViewController(vc!, animated: true)
     }
