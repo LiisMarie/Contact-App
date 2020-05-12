@@ -121,9 +121,24 @@ extension ViewController: UITableViewDataSource {
         }
         
         cell.selectionStyle = .none
-        //cell.textLabel?.text = "\(person.firstName!) \(person.lastName!)"
         cell.name?.text = "\(person.firstName!) \(person.lastName!)"
-        cell.contactsCount?.text = "0"
+        
+        do {
+            let contacts = try contactRepo.all()
+            var personContacts =  [Contact]()
+            for contact in contacts {
+                personContacts.append(contact)
+            }
+            if (personContacts.count == 0) {
+                cell.contactsCount?.text = "0 contacts"
+            } else if (personContacts.count == 1) {
+                cell.contactsCount?.text = "\(personContacts[0].value!)"
+            } else {
+                cell.contactsCount?.text = "\(personContacts.count) contacts"
+            }
+        } catch {
+            cell.contactsCount?.text = "0 contacts"
+        }
         
         return cell
     }
@@ -137,10 +152,50 @@ extension ViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if (editingStyle == .delete) {
+            
             guard let person = self.fetchController?.object(at: indexPath) else {return}
-            try? personRepo.delete(person: person)
+            
+            let alertController = UIAlertController(title: "Delete person", message: "Are you sure about deleting \(person.firstName!) \(person.lastName!)?", preferredStyle: .alert)
+            alertController.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))
+            alertController.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: {
+                (_: UIAlertAction!) in
+                try? self.personRepo.delete(person: person)
+            }))
+            
+            self.present(alertController, animated: true, completion: nil)
+            
         }
     }
+    
+    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let edit = UIContextualAction(style: .normal, title: "Edit") {
+            (contextualAction, view, actionPerformed: (Bool) -> ()) in
+            print("Edit clicked")
+            
+            guard let person = self.fetchController?.object(at: indexPath) else {return}
+            let alertController = UIAlertController(title: "Edit contact", message: "", preferredStyle: .alert)
+            alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+            alertController.addAction(UIAlertAction(title: "Save changes", style: .default, handler: {_ in
+                let firstName = alertController.textFields?[0].text
+                let lastName = alertController.textFields?[1].text
+                
+                person.firstName = firstName
+                person.lastName = lastName
+                try? self.personRepo.update(person: person)
+                
+            }))
+            alertController.addTextField { textField in
+                textField.text = "\(person.firstName!)"
+            }
+            alertController.addTextField { textField in
+                textField.text = "\(person.lastName!)"
+            }
+            
+            self.present(alertController, animated: true, completion: nil)
+        }
+        return UISwipeActionsConfiguration(actions: [edit])
+    }
+
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc = storyboard?.instantiateViewController(withIdentifier: "ContactViewController") as? ContactViewController

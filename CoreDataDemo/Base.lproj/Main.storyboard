@@ -15,43 +15,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="97" translatesAutoresizingMaskIntoConstraints="NO" id="NVn-cx-R45">
-                                <rect key="frame" x="8" y="96" width="398" height="36"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NJD-h2-trN">
-                                        <rect key="frame" x="0.0" y="0.0" width="68" height="36"/>
-                                        <color key="backgroundColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <state key="normal" title="Delete"/>
-                                        <connections>
-                                            <action selector="deleteContactTouchUpInside:" destination="FxP-T7-WsT" eventType="touchUpInside" id="Uv1-kI-9e4"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rXv-xL-zRK">
-                                        <rect key="frame" x="165" y="0.0" width="68" height="36"/>
-                                        <color key="backgroundColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <state key="normal" title="Edit"/>
-                                        <connections>
-                                            <action selector="editContactTouchUpInside:" destination="FxP-T7-WsT" eventType="touchUpInside" id="mId-DV-Szw"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K4e-E7-fOy">
-                                        <rect key="frame" x="330" y="0.0" width="68" height="36"/>
-                                        <color key="backgroundColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <state key="normal" title="Add"/>
-                                        <connections>
-                                            <action selector="addContactTouchUpInside:" destination="FxP-T7-WsT" eventType="touchUpInside" id="KbD-Df-tFE"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                            </stackView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="mhd-1c-hjk">
-                                <rect key="frame" x="8" y="148" width="398" height="722"/>
+                                <rect key="frame" x="8" y="96" width="398" height="730"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ContactTableViewCell" rowHeight="60" id="Wra-FY-VcT" customClass="ContactTableViewCell" customModule="CoreDataDemo" customModuleProvider="target">
@@ -91,16 +56,23 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KKp-En-iNx">
+                                <rect key="frame" x="16" y="842" width="106" height="36"/>
+                                <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <state key="normal" title="Add contact"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="KKp-En-iNx" firstAttribute="bottom" secondItem="aU0-Ba-vJa" secondAttribute="bottom" constant="16" id="4Wp-gA-5TC"/>
                             <constraint firstItem="aU0-Ba-vJa" firstAttribute="trailing" secondItem="mhd-1c-hjk" secondAttribute="trailing" constant="8" id="CxF-jE-jFh"/>
-                            <constraint firstItem="mhd-1c-hjk" firstAttribute="bottom" secondItem="aU0-Ba-vJa" secondAttribute="bottom" constant="8" id="LrN-BR-O4w"/>
+                            <constraint firstItem="mhd-1c-hjk" firstAttribute="top" secondItem="aU0-Ba-vJa" secondAttribute="top" constant="8" id="J6M-lx-J5F"/>
                             <constraint firstItem="mhd-1c-hjk" firstAttribute="leading" secondItem="aU0-Ba-vJa" secondAttribute="leading" constant="8" id="UCS-0n-Pkk"/>
-                            <constraint firstItem="aU0-Ba-vJa" firstAttribute="trailing" secondItem="NVn-cx-R45" secondAttribute="trailing" constant="8" id="ean-mv-ebL"/>
-                            <constraint firstItem="mhd-1c-hjk" firstAttribute="top" secondItem="NVn-cx-R45" secondAttribute="bottom" constant="16" id="fvP-nY-yU7"/>
-                            <constraint firstItem="NVn-cx-R45" firstAttribute="leading" secondItem="aU0-Ba-vJa" secondAttribute="leading" constant="8" id="niI-qH-ji6"/>
-                            <constraint firstItem="NVn-cx-R45" firstAttribute="top" secondItem="aU0-Ba-vJa" secondAttribute="top" constant="8" id="z0j-Wy-ilD"/>
+                            <constraint firstItem="KKp-En-iNx" firstAttribute="leading" secondItem="aU0-Ba-vJa" secondAttribute="leading" constant="16" id="b3v-1n-uaZ"/>
+                            <constraint firstItem="KKp-En-iNx" firstAttribute="top" secondItem="mhd-1c-hjk" secondAttribute="bottom" constant="16" id="btY-XI-EVb"/>
+                            <constraint firstItem="aU0-Ba-vJa" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="KKp-En-iNx" secondAttribute="trailing" constant="16" id="tL9-ry-hio"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="aU0-Ba-vJa"/>
                     </view>
@@ -150,7 +122,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="kKO-Lo-MI1">
-                                <rect key="frame" x="8" y="96" width="398" height="706"/>
+                                <rect key="frame" x="8" y="96" width="398" height="698"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="PersonTableViewCell" editingAccessoryType="disclosureIndicator" id="eAH-8A-tpA" customClass="PersonTableViewCell" customModule="CoreDataDemo" customModuleProvider="target">
@@ -191,7 +163,7 @@
                                 </prototypes>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P3c-vy-BS4">
-                                <rect key="frame" x="8" y="818" width="101" height="36"/>
+                                <rect key="frame" x="16" y="810" width="101" height="36"/>
                                 <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -205,10 +177,10 @@
                         <constraints>
                             <constraint firstItem="kKO-Lo-MI1" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="8" id="6HE-7l-9S2"/>
                             <constraint firstItem="kKO-Lo-MI1" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="MCE-Jf-IbV"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="P3c-vy-BS4" secondAttribute="trailing" constant="8" id="X9b-BT-tvj"/>
-                            <constraint firstItem="P3c-vy-BS4" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="8" id="fLd-qr-ek8"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="P3c-vy-BS4" secondAttribute="trailing" constant="16" id="X9b-BT-tvj"/>
+                            <constraint firstItem="P3c-vy-BS4" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="fLd-qr-ek8"/>
                             <constraint firstItem="P3c-vy-BS4" firstAttribute="top" secondItem="kKO-Lo-MI1" secondAttribute="bottom" constant="16" id="nPz-wi-Z21"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="P3c-vy-BS4" secondAttribute="bottom" constant="8" id="rep-kg-WWC"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="P3c-vy-BS4" secondAttribute="bottom" constant="16" id="rep-kg-WWC"/>
                             <constraint firstItem="kKO-Lo-MI1" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="8" id="rk0-n5-SLs"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>

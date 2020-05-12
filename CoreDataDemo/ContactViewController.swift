@@ -116,12 +116,30 @@ class ContactViewController: UIViewController {
     
     
     @IBAction func addContactTouchUpInside(_ sender: Any) {
-    }
-    
-    @IBAction func editContactTouchUpInside(_ sender: Any) {
-    }
-    
-    @IBAction func deleteContactTouchUpInside(_ sender: Any) {
+        let alertController = UIAlertController(title: "Add contact for \(self.person.firstName!) \(self.person.lastName!)", message: "", preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        alertController.addAction(UIAlertAction(title: "Add", style: .default, handler: {_ in
+            /*
+            let person = Person(context: self.personRepo.context)
+            person.firstName = alertController.textFields?[0].text
+            person.lastName = alertController.textFields?[1].text
+            do {
+                try person.validateForInsert()
+                print("passed validation")
+                try? self.personRepo.insert(person: person)
+            } catch {
+                let error = error as NSError
+                print(error)
+            }*/
+        }))
+        alertController.addTextField { textField in
+            textField.placeholder = "Value"
+        }
+        alertController.addTextField { textField in
+            textField.placeholder = "Last name"
+        }
+        
+        self.present(alertController, animated: true, completion: nil)
     }
     
 }
