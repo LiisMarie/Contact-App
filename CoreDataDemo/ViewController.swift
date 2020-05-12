@@ -197,6 +197,36 @@ extension ViewController: UITableViewDelegate {
     }
 
     
+    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let edit = UIContextualAction(style: .normal, title: "Edit") {
+            (contextualAction, view, actionPerformed: (Bool) -> ()) in
+            print("Edit clicked")
+            
+            guard let person = self.fetchController?.object(at: indexPath) else {return}
+            let alertController = UIAlertController(title: "Edit contact", message: "", preferredStyle: .alert)
+            alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+            alertController.addAction(UIAlertAction(title: "Save changes", style: .default, handler: {_ in
+                let firstName = alertController.textFields?[0].text
+                let lastName = alertController.textFields?[1].text
+                
+                person.firstName = firstName
+                person.lastName = lastName
+                try? self.personRepo.update(person: person)
+                
+            }))
+            alertController.addTextField { textField in
+                textField.text = "\(person.firstName!)"
+            }
+            alertController.addTextField { textField in
+                textField.text = "\(person.lastName!)"
+            }
+            
+            self.present(alertController, animated: true, completion: nil)
+        }
+        return UISwipeActionsConfiguration(actions: [edit])
+    }
+
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc = storyboard?.instantiateViewController(withIdentifier: "ContactViewController") as? ContactViewController
         let person = (self.fetchController?.object(at: indexPath))

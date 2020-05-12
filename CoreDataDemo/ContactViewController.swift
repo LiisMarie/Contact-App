@@ -142,6 +142,31 @@ class ContactViewController: UIViewController {
         self.present(alertController, animated: true, completion: nil)
     }
     
+    @IBAction func editContactTouchUpInside(_ sender: Any) {
+        let alertController = UIAlertController(title: "Edit contact", message: "", preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        alertController.addAction(UIAlertAction(title: "Save changes", style: .default, handler: {_ in
+            let firstName = alertController.textFields?[0].text
+            let lastName = alertController.textFields?[1].text
+            
+            self.person.firstName = firstName
+            self.person.lastName = lastName
+            try? self.personRepo.update(person: self.person)
+            
+        }))
+        alertController.addTextField { textField in
+            textField.text = "\(self.person.firstName!)"
+        }
+        alertController.addTextField { textField in
+            textField.text = "\(self.person.lastName!)"
+        }
+        
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
+    @IBAction func deleteContactTouchUpInside(_ sender: Any) {
+    }
+    
 }
 
 extension ContactViewController: UITableViewDataSource {
