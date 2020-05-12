@@ -69,50 +69,7 @@ class ContactViewController: UIViewController {
         fetchControllerContactType!.delegate = self
         try? fetchControllerContactType!.performFetch()
         
-
-        /*
-        do {
-            /*let newPerson = Person(context: self.personRepo.context)
-            newPerson.firstName = "Andres"
-            newPerson.lastName = "Käver"
-            try personRepo.insert(person: newPerson)*/
-            
-            let result = try personRepo.all()
-            for person in result {
-                print(person.firstName!)
-                print(person.lastName!)
-            }
-        } catch {
-            print("Failed!")
-        }*/
     }
-    
-    /*
-    @IBAction func addPersonTouchUpInside(_ sender: Any) {
-        let alertController = UIAlertController(title: "New user", message: "", preferredStyle: .alert)
-        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        alertController.addAction(UIAlertAction(title: "Add", style: .default, handler: {_ in
-            let person = Person(context: self.personRepo.context)
-            person.firstName = alertController.textFields?[0].text
-            person.lastName = alertController.textFields?[1].text
-            do {
-                try person.validateForInsert()
-                print("passed validation")
-                try? self.personRepo.insert(person: person)
-            } catch {
-                let error = error as NSError
-                print(error)
-            }
-        }))
-        alertController.addTextField { textField in
-            textField.placeholder = "First name"
-        }
-        alertController.addTextField { textField in
-            textField.placeholder = "Last name"
-        }
-        
-        self.present(alertController, animated: true, completion: nil)
-    }*/
     
     
     @IBAction func addContactTouchUpInside(_ sender: Any) {
@@ -142,31 +99,6 @@ class ContactViewController: UIViewController {
         self.present(alertController, animated: true, completion: nil)
     }
     
-    @IBAction func editContactTouchUpInside(_ sender: Any) {
-        let alertController = UIAlertController(title: "Edit contact", message: "", preferredStyle: .alert)
-        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        alertController.addAction(UIAlertAction(title: "Save changes", style: .default, handler: {_ in
-            let firstName = alertController.textFields?[0].text
-            let lastName = alertController.textFields?[1].text
-            
-            self.person.firstName = firstName
-            self.person.lastName = lastName
-            try? self.personRepo.update(person: self.person)
-            
-        }))
-        alertController.addTextField { textField in
-            textField.text = "\(self.person.firstName!)"
-        }
-        alertController.addTextField { textField in
-            textField.text = "\(self.person.lastName!)"
-        }
-        
-        self.present(alertController, animated: true, completion: nil)
-    }
-    
-    @IBAction func deleteContactTouchUpInside(_ sender: Any) {
-    }
-    
 }
 
 extension ContactViewController: UITableViewDataSource {
@@ -179,7 +111,6 @@ extension ContactViewController: UITableViewDataSource {
         guard let contact = self.fetchControllerContact?.object(at: indexPath) else {
             return cell
         }
-        
         
         cell.selectionStyle = .none
         cell.value?.text = "\(contact.value!)"

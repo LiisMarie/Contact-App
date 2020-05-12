@@ -16,7 +16,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="mhd-1c-hjk">
-                                <rect key="frame" x="8" y="96" width="398" height="730"/>
+                                <rect key="frame" x="8" y="96" width="398" height="706"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ContactTableViewCell" rowHeight="60" id="Wra-FY-VcT" customClass="ContactTableViewCell" customModule="CoreDataDemo" customModuleProvider="target">
@@ -57,7 +57,7 @@
                                 </prototypes>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KKp-En-iNx">
-                                <rect key="frame" x="16" y="842" width="106" height="36"/>
+                                <rect key="frame" x="16" y="818" width="106" height="36"/>
                                 <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -66,12 +66,12 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="KKp-En-iNx" firstAttribute="bottom" secondItem="aU0-Ba-vJa" secondAttribute="bottom" constant="16" id="4Wp-gA-5TC"/>
                             <constraint firstItem="aU0-Ba-vJa" firstAttribute="trailing" secondItem="mhd-1c-hjk" secondAttribute="trailing" constant="8" id="CxF-jE-jFh"/>
                             <constraint firstItem="mhd-1c-hjk" firstAttribute="top" secondItem="aU0-Ba-vJa" secondAttribute="top" constant="8" id="J6M-lx-J5F"/>
                             <constraint firstItem="mhd-1c-hjk" firstAttribute="leading" secondItem="aU0-Ba-vJa" secondAttribute="leading" constant="8" id="UCS-0n-Pkk"/>
                             <constraint firstItem="KKp-En-iNx" firstAttribute="leading" secondItem="aU0-Ba-vJa" secondAttribute="leading" constant="16" id="b3v-1n-uaZ"/>
                             <constraint firstItem="KKp-En-iNx" firstAttribute="top" secondItem="mhd-1c-hjk" secondAttribute="bottom" constant="16" id="btY-XI-EVb"/>
+                            <constraint firstItem="aU0-Ba-vJa" firstAttribute="bottom" secondItem="KKp-En-iNx" secondAttribute="bottom" constant="8" id="muA-fN-J82"/>
                             <constraint firstItem="aU0-Ba-vJa" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="KKp-En-iNx" secondAttribute="trailing" constant="16" id="tL9-ry-hio"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="aU0-Ba-vJa"/>
