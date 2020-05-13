@@ -35,9 +35,7 @@ class ContactViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         // Do any additional setup after loading the view.
         
         container = AppDelegate.persistentContainer
-        
-        self.title = "\(person!.firstName!) \(person!.lastName!)"
-        
+                
         personRepo = PersonRepository(container: container)
         contactRepo = ContactRepository(container: container)
         contactTypeRepo = ContactTypeRepository(container: container)
@@ -50,6 +48,7 @@ class ContactViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         requestContact.sortDescriptors = [NSSortDescriptor(key: "value", ascending: true)]
         if (person != nil) {
             requestContact.predicate = NSPredicate(format: "person = %@", person!)
+            self.title = "\(person!.firstName!) \(person!.lastName!)"
         }
         if (contactType != nil) {
             requestContact.predicate = NSPredicate(format: "contactType = %@", contactType!)
@@ -175,6 +174,31 @@ extension ContactViewController: UITableViewDelegate {
             try? contactRepo.delete(contacts: contact)
         }
     }
+    
+    internal func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let edit = UIContextualAction(style: .normal, title: "Edit") {
+            (contextualAction, view, actionPerformed: (Bool) -> ()) in
+            print("Edit clicked")
+            
+            guard let contact = self.fetchController?.object(at: indexPath) else {return}
+            let alertController = UIAlertController(title: "Edit contact", message: "", preferredStyle: .alert)
+            alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+            alertController.addAction(UIAlertAction(title: "Save changes", style: .default, handler: {_ in
+                let value = alertController.textFields?[0].text
+                contact.value = value!
+                try? self.contactRepo.update(contacts: contact)
+                
+            }))
+            alertController.addTextField { textField in
+                textField.text = "\(contact.value!)"
+            }
+
+            
+            self.present(alertController, animated: true, completion: nil)
+        }
+        return UISwipeActionsConfiguration(actions: [edit])
+    }
+    
 }
 
 extension ContactViewController: NSFetchedResultsControllerDelegate {

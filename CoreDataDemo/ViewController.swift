@@ -175,7 +175,7 @@ extension ViewController: UITableViewDelegate {
             print("Edit clicked")
             
             guard let person = self.fetchController?.object(at: indexPath) else {return}
-            let alertController = UIAlertController(title: "Edit contact", message: "", preferredStyle: .alert)
+            let alertController = UIAlertController(title: "Edit person", message: "", preferredStyle: .alert)
             alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
             alertController.addAction(UIAlertAction(title: "Save changes", style: .default, handler: {_ in
                 let firstName = alertController.textFields?[0].text
