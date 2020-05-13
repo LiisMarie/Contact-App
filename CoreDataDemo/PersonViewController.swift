@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class ViewController: UIViewController {
+class PersonViewController: UIViewController {
     
     var container: NSPersistentContainer!
     
@@ -44,21 +44,6 @@ class ViewController: UIViewController {
         try? fetchController!.performFetch()
         
         initContactTypes()
-        /*
-        do {
-            /*let newPerson = Person(context: self.personRepo.context)
-            newPerson.firstName = "Andres"
-            newPerson.lastName = "Käver"
-            try personRepo.insert(person: newPerson)*/
-            
-            let result = try personRepo.all()
-            for person in result {
-                print(person.firstName!)
-                print(person.lastName!)
-            }
-        } catch {
-            print("Failed!")
-        }*/
         
     }
     
@@ -109,7 +94,7 @@ class ViewController: UIViewController {
     }
 }
 
-extension ViewController: UITableViewDataSource {
+extension PersonViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.fetchController?.fetchedObjects?.count ?? 0
     }
@@ -147,7 +132,7 @@ extension ViewController: UITableViewDataSource {
     
 }
 
-extension ViewController: UITableViewDelegate {
+extension PersonViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         true
     }
@@ -209,7 +194,7 @@ extension ViewController: UITableViewDelegate {
     }
 }
 
-extension ViewController: NSFetchedResultsControllerDelegate {
+extension PersonViewController: NSFetchedResultsControllerDelegate {
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
         switch type {
         case .delete:

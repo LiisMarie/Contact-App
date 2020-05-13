@@ -52,6 +52,8 @@ class ContactViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         }
         if (contactType != nil) {
             requestContact.predicate = NSPredicate(format: "contactType = %@", contactType!)
+            self.title = "\(contactType!.name!)"
+
         }
         fetchController = NSFetchedResultsController(fetchRequest: requestContact, managedObjectContext: container.viewContext, sectionNameKeyPath: nil, cacheName: nil)
         fetchController!.delegate = self
@@ -148,14 +150,24 @@ extension ContactViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = self.tableView.dequeueReusableCell(withIdentifier: "ContactTableViewCell", for: indexPath) as! ContactTableViewCell
-        guard let contact = self.fetchController?.object(at: indexPath) else {
+        
+        guard let cellItem = self.fetchController?.object(at: indexPath) else {
             return cell
         }
         
         cell.selectionStyle = .none
-        cell.value?.text = "\(contact.value!)"
-        // todo setting image too
-        cell.imageView?.image = UIImage(named: (contact.contactType?.name!)!)
+        
+        if (person != nil) {
+            cell.value?.text = "\(cellItem.value!)"
+            cell.name?.text = ""
+        }
+        
+        if (contactType != nil) {
+            cell.value?.text = "\(cellItem.value!)"
+            cell.name?.text = "\(cellItem.person!.firstName!) \(cellItem.person!.lastName!)"
+        }
+        
+        cell.imageView?.image = UIImage(named: (cellItem.contactType?.name!)!)
         
         return cell
     }

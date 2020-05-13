@@ -9,9 +9,11 @@
 /* Begin PBXBuildFile section */
 		23702F5B2469EAD200AB8025 /* ContactRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23702F5A2469EAD200AB8025 /* ContactRepository.swift */; };
 		23702F5D2469EC7900AB8025 /* ContactTypeRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23702F5C2469EC7900AB8025 /* ContactTypeRepository.swift */; };
+		23821AE2246C20B0003046BC /* ContactTypeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23821AE1246C20B0003046BC /* ContactTypeTableViewCell.swift */; };
+		23821AE4246C22BA003046BC /* ContactTypesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23821AE3246C22BA003046BC /* ContactTypesViewController.swift */; };
 		23BA48242469BFC7004E4F1A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23BA48232469BFC7004E4F1A /* AppDelegate.swift */; };
 		23BA48262469BFC7004E4F1A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23BA48252469BFC7004E4F1A /* SceneDelegate.swift */; };
-		23BA48282469BFC7004E4F1A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23BA48272469BFC7004E4F1A /* ViewController.swift */; };
+		23BA48282469BFC7004E4F1A /* PersonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23BA48272469BFC7004E4F1A /* PersonViewController.swift */; };
 		23BA482B2469BFC7004E4F1A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 23BA48292469BFC7004E4F1A /* Main.storyboard */; };
 		23BA482E2469BFC7004E4F1A /* CoreDataDemo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 23BA482C2469BFC7004E4F1A /* CoreDataDemo.xcdatamodeld */; };
 		23BA48302469BFC8004E4F1A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 23BA482F2469BFC8004E4F1A /* Assets.xcassets */; };
@@ -32,10 +34,12 @@
 /* Begin PBXFileReference section */
 		23702F5A2469EAD200AB8025 /* ContactRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactRepository.swift; sourceTree = "<group>"; };
 		23702F5C2469EC7900AB8025 /* ContactTypeRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactTypeRepository.swift; sourceTree = "<group>"; };
+		23821AE1246C20B0003046BC /* ContactTypeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactTypeTableViewCell.swift; sourceTree = "<group>"; };
+		23821AE3246C22BA003046BC /* ContactTypesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactTypesViewController.swift; sourceTree = "<group>"; };
 		23BA48202469BFC7004E4F1A /* CoreDataDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoreDataDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		23BA48232469BFC7004E4F1A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		23BA48252469BFC7004E4F1A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		23BA48272469BFC7004E4F1A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		23BA48272469BFC7004E4F1A /* PersonViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonViewController.swift; sourceTree = "<group>"; };
 		23BA482A2469BFC7004E4F1A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		23BA482D2469BFC7004E4F1A /* CoreDataDemo.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreDataDemo.xcdatamodel; sourceTree = "<group>"; };
 		23BA482F2469BFC8004E4F1A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -88,7 +92,7 @@
 				23BA48522469C984004E4F1A /* Domain */,
 				23BA48232469BFC7004E4F1A /* AppDelegate.swift */,
 				23BA48252469BFC7004E4F1A /* SceneDelegate.swift */,
-				23BA48272469BFC7004E4F1A /* ViewController.swift */,
+				23BA48272469BFC7004E4F1A /* PersonViewController.swift */,
 				23BA48292469BFC7004E4F1A /* Main.storyboard */,
 				23BA482F2469BFC8004E4F1A /* Assets.xcassets */,
 				23BA48312469BFC8004E4F1A /* LaunchScreen.storyboard */,
@@ -98,6 +102,8 @@
 				23F3D261246A8C52007FCF57 /* PersonTableViewCell.swift */,
 				23F3D263246A9657007FCF57 /* ContactTableViewCell.swift */,
 				23F3D265246A978A007FCF57 /* ContactViewController.swift */,
+				23821AE1246C20B0003046BC /* ContactTypeTableViewCell.swift */,
+				23821AE3246C22BA003046BC /* ContactTypesViewController.swift */,
 			);
 			path = CoreDataDemo;
 			sourceTree = "<group>";
@@ -203,9 +209,11 @@
 				23F3D267246AA30C007FCF57 /* ContactViewController.swift in Sources */,
 				23F3D262246A8C52007FCF57 /* PersonTableViewCell.swift in Sources */,
 				23F3D264246A9657007FCF57 /* ContactTableViewCell.swift in Sources */,
+				23821AE2246C20B0003046BC /* ContactTypeTableViewCell.swift in Sources */,
 				23BA484C2469C96B004E4F1A /* ContactType+CoreDataClass.swift in Sources */,
 				23702F5D2469EC7900AB8025 /* ContactTypeRepository.swift in Sources */,
-				23BA48282469BFC7004E4F1A /* ViewController.swift in Sources */,
+				23BA48282469BFC7004E4F1A /* PersonViewController.swift in Sources */,
+				23821AE4246C22BA003046BC /* ContactTypesViewController.swift in Sources */,
 				23BA484F2469C96B004E4F1A /* Contact+CoreDataProperties.swift in Sources */,
 				23702F5B2469EAD200AB8025 /* ContactRepository.swift in Sources */,
 				23F3D260246A830C007FCF57 /* PrimarySplitViewController.swift in Sources */,
