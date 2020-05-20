@@ -25,7 +25,6 @@
 		23BA48502469C96B004E4F1A /* Person+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23BA484A2469C96B004E4F1A /* Person+CoreDataClass.swift */; };
 		23BA48512469C96B004E4F1A /* Person+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23BA484B2469C96B004E4F1A /* Person+CoreDataProperties.swift */; };
 		23BA48542469CA25004E4F1A /* PersonRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23BA48532469CA25004E4F1A /* PersonRepository.swift */; };
-		23F3D260246A830C007FCF57 /* PrimarySplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23F3D25F246A830C007FCF57 /* PrimarySplitViewController.swift */; };
 		23F3D262246A8C52007FCF57 /* PersonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23F3D261246A8C52007FCF57 /* PersonTableViewCell.swift */; };
 		23F3D264246A9657007FCF57 /* ContactTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23F3D263246A9657007FCF57 /* ContactTableViewCell.swift */; };
 		23F3D267246AA30C007FCF57 /* ContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23F3D265246A978A007FCF57 /* ContactViewController.swift */; };
@@ -52,7 +51,6 @@
 		23BA484A2469C96B004E4F1A /* Person+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Person+CoreDataClass.swift"; sourceTree = "<group>"; };
 		23BA484B2469C96B004E4F1A /* Person+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Person+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		23BA48532469CA25004E4F1A /* PersonRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonRepository.swift; sourceTree = "<group>"; };
-		23F3D25F246A830C007FCF57 /* PrimarySplitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimarySplitViewController.swift; sourceTree = "<group>"; };
 		23F3D261246A8C52007FCF57 /* PersonTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonTableViewCell.swift; sourceTree = "<group>"; };
 		23F3D263246A9657007FCF57 /* ContactTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactTableViewCell.swift; sourceTree = "<group>"; };
 		23F3D265246A978A007FCF57 /* ContactViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactViewController.swift; sourceTree = "<group>"; };
@@ -98,7 +96,6 @@
 				23BA48312469BFC8004E4F1A /* LaunchScreen.storyboard */,
 				23BA48342469BFC8004E4F1A /* Info.plist */,
 				23BA482C2469BFC7004E4F1A /* CoreDataDemo.xcdatamodeld */,
-				23F3D25F246A830C007FCF57 /* PrimarySplitViewController.swift */,
 				23F3D261246A8C52007FCF57 /* PersonTableViewCell.swift */,
 				23F3D263246A9657007FCF57 /* ContactTableViewCell.swift */,
 				23F3D265246A978A007FCF57 /* ContactViewController.swift */,
@@ -216,7 +213,6 @@
 				23821AE4246C22BA003046BC /* ContactTypesViewController.swift in Sources */,
 				23BA484F2469C96B004E4F1A /* Contact+CoreDataProperties.swift in Sources */,
 				23702F5B2469EAD200AB8025 /* ContactRepository.swift in Sources */,
-				23F3D260246A830C007FCF57 /* PrimarySplitViewController.swift in Sources */,
 				23BA48502469C96B004E4F1A /* Person+CoreDataClass.swift in Sources */,
 				23BA48512469C96B004E4F1A /* Person+CoreDataProperties.swift in Sources */,
 				23BA482E2469BFC7004E4F1A /* CoreDataDemo.xcdatamodeld in Sources */,

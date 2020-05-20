@@ -184,13 +184,24 @@ extension PersonViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        /*
         let vc = storyboard?.instantiateViewController(withIdentifier: "ContactViewController") as? ContactViewController
         let person = (self.fetchController?.object(at: indexPath))
         if (person != nil) {
             vc?.person = person!
             vc?.contactType = nil
         }
-        self.navigationController?.pushViewController(vc!, animated: true)
+        self.navigationController?.pushViewController(vc!, animated: true)*/
+        //performSegue(withIdentifier: "FromPersonsToContacts", sender: tableView)
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let viewController = storyboard.instantiateViewController(withIdentifier: "ContactViewController") as! ContactViewController
+        let person = (self.fetchController?.object(at: indexPath))
+        if (person != nil) {
+            viewController.person = person!
+            viewController.contactType = nil
+        }
+        present(viewController, animated: true, completion: nil)
     }
 }
 
