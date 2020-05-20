@@ -333,7 +333,6 @@
                     <tabBarItem key="tabBarItem" title="Contact types" image="folder.badge.person.crop" catalog="system" selectedImage="folder.fill.badge.person.crop" id="kfs-da-rnH"/>
                     <connections>
                         <segue destination="qqi-1I-WCd" kind="relationship" relationship="masterViewController" id="jsX-MB-Wj3"/>
-                        <segue destination="FxP-T7-WsT" kind="relationship" relationship="detailViewController" id="FrX-RE-IVH"/>
                     </connections>
                 </splitViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="N1m-6U-wpH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -341,9 +340,6 @@
             <point key="canvasLocation" x="790" y="-583"/>
         </scene>
     </scenes>
-    <inferredMetricsTieBreakers>
-        <segue reference="FrX-RE-IVH"/>
-    </inferredMetricsTieBreakers>
     <resources>
         <image name="folder.badge.person.crop" catalog="system" width="128" height="86"/>
         <image name="folder.fill.badge.person.crop" catalog="system" width="128" height="86"/>
