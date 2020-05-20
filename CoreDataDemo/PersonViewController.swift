@@ -19,6 +19,8 @@ class PersonViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
+    @IBOutlet weak var btnAddPerson: UIButton!
+    
     var fetchController: NSFetchedResultsController<Person>?
     
     override func viewDidLoad() {
@@ -27,14 +29,17 @@ class PersonViewController: UIViewController {
         
         container = AppDelegate.persistentContainer
         
+        // init repositories
         personRepo = PersonRepository(container: container)
         contactRepo = ContactRepository(container: container)
         contactTypeRepo = ContactTypeRepository(container: container)
         
+        // set up tableview
         tableView.tableFooterView = UIView()
         tableView.dataSource = self
         tableView.delegate = self
         
+        // init fetch controller
         let request = NSFetchRequest<Person>(entityName: String(describing: Person.self))
         request.sortDescriptors = [NSSortDescriptor(key: "firstName", ascending: true)]
         fetchController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: container.viewContext, sectionNameKeyPath: nil, cacheName: nil)
@@ -45,8 +50,12 @@ class PersonViewController: UIViewController {
         
         initContactTypes()
         
+        // make add person button look nice
+        btnAddPerson.titleEdgeInsets = UIEdgeInsets(top: 5.0, left: 5.0, bottom: 5.0, right: 5.0)
+        btnAddPerson.layer.cornerRadius = 10
     }
     
+    // if necessary (they don't exist yet) then creates contact types
     func initContactTypes() {
         do {
             let result = try contactTypeRepo.all()
@@ -67,8 +76,9 @@ class PersonViewController: UIViewController {
         }
     }
     
+    // method for adding new person to database
     @IBAction func addPersonTouchUpInside(_ sender: Any) {
-        let alertController = UIAlertController(title: "New user", message: "", preferredStyle: .alert)
+        let alertController = UIAlertController(title: "New person", message: "", preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         alertController.addAction(UIAlertAction(title: "Add", style: .default, handler: {_ in
             let person = Person(context: self.personRepo.context)
@@ -100,6 +110,7 @@ extension PersonViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        // set up cell
         let cell = self.tableView.dequeueReusableCell(withIdentifier: "PersonTableViewCell", for: indexPath) as! PersonTableViewCell
         guard let person = self.fetchController?.object(at: indexPath) else {
             return cell
@@ -133,10 +144,12 @@ extension PersonViewController: UITableViewDataSource {
 }
 
 extension PersonViewController: UITableViewDelegate {
+    // editing rows is allowed
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         true
     }
     
+    // person deletion logic, asks for user confirmation
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if (editingStyle == .delete) {
             
@@ -154,6 +167,7 @@ extension PersonViewController: UITableViewDelegate {
         }
     }
     
+    // person editing logic
     internal func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let edit = UIContextualAction(style: .normal, title: "Edit") {
             (contextualAction, view, actionPerformed: (Bool) -> ()) in
@@ -183,17 +197,8 @@ extension PersonViewController: UITableViewDelegate {
         return UISwipeActionsConfiguration(actions: [edit])
     }
     
+    // opening contacts for given person
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        /*
-        let vc = storyboard?.instantiateViewController(withIdentifier: "ContactViewController") as? ContactViewController
-        let person = (self.fetchController?.object(at: indexPath))
-        if (person != nil) {
-            vc?.person = person!
-            vc?.contactType = nil
-        }
-        self.navigationController?.pushViewController(vc!, animated: true)*/
-        //performSegue(withIdentifier: "FromPersonsToContacts", sender: tableView)
-        
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let viewController = storyboard.instantiateViewController(withIdentifier: "ContactViewController") as! ContactViewController
         let person = (self.fetchController?.object(at: indexPath))

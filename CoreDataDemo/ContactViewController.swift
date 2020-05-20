@@ -29,38 +29,49 @@ class ContactViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     var person : Person?
     var contactType: ContactType?
     
+    @IBOutlet weak var btnAddContact: UIButton!
+    
+    @IBOutlet weak var headerLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
         
         container = AppDelegate.persistentContainer
                 
+        // setting repositories
         personRepo = PersonRepository(container: container)
         contactRepo = ContactRepository(container: container)
         contactTypeRepo = ContactTypeRepository(container: container)
         
+        // setting up tableview
         tableView.tableFooterView = UIView()
         tableView.dataSource = self
         tableView.delegate = self
         
+        // init fetchcontroller based on whether we are looking at persons contacts or contacts of specific type
         let requestContact = NSFetchRequest<Contact>(entityName: String(describing: Contact.self))
         requestContact.sortDescriptors = [NSSortDescriptor(key: "value", ascending: true)]
         if (person != nil) {
             requestContact.predicate = NSPredicate(format: "person = %@", person!)
             self.title = "\(person!.firstName!) \(person!.lastName!)"
+            headerLabel.text = "\(person!.firstName!) \(person!.lastName!)"
         }
         if (contactType != nil) {
             requestContact.predicate = NSPredicate(format: "contactType = %@", contactType!)
             self.title = "\(contactType!.name!)"
+            headerLabel.text = "\(contactType!.name!)"
 
         }
         fetchController = NSFetchedResultsController(fetchRequest: requestContact, managedObjectContext: container.viewContext, sectionNameKeyPath: nil, cacheName: nil)
         fetchController!.delegate = self
         try? fetchController!.performFetch()
+        
+        // make add contact button look nice
+        btnAddContact.titleEdgeInsets = UIEdgeInsets(top: 5.0, left: 5.0, bottom: 5.0, right: 5.0)
+        btnAddContact.layer.cornerRadius = 10
     }
     
-    
+    // logic for adding contact
     @IBAction func addContactTouchUpInside(_ sender: Any) {
         self.pickerSelectedRow = 0
         pickerItems = [String]()
@@ -148,6 +159,7 @@ extension ContactViewController: UITableViewDataSource {
         return self.fetchController?.fetchedObjects?.count ?? 0
     }
     
+    // setting up the cell
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = self.tableView.dequeueReusableCell(withIdentifier: "ContactTableViewCell", for: indexPath) as! ContactTableViewCell
         
@@ -180,6 +192,7 @@ extension ContactViewController: UITableViewDelegate {
         true
     }
     
+    // contact deletion
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if (editingStyle == .delete) {
             guard let contact = self.fetchController?.object(at: indexPath) else {return}
@@ -187,6 +200,7 @@ extension ContactViewController: UITableViewDelegate {
         }
     }
     
+    // contact editing
     internal func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let edit = UIContextualAction(style: .normal, title: "Edit") {
             (contextualAction, view, actionPerformed: (Bool) -> ()) in

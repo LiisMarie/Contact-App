@@ -29,14 +29,17 @@ class ContactTypesViewController: UIViewController {
         
         container = AppDelegate.persistentContainer
         
+        // init repositories
         personRepo = PersonRepository(container: container)
         contactRepo = ContactRepository(container: container)
         contactTypeRepo = ContactTypeRepository(container: container)
         
+        // set up tableview
         tableView.tableFooterView = UIView()
         tableView.dataSource = self
         tableView.delegate = self
         
+        // init controller
         let request = NSFetchRequest<ContactType>(entityName: String(describing: ContactType.self))
         request.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
         fetchController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: container.viewContext, sectionNameKeyPath: nil, cacheName: nil)
@@ -53,6 +56,7 @@ extension ContactTypesViewController: UITableViewDataSource {
         return self.fetchController?.fetchedObjects?.count ?? 0
     }
     
+    // setting up cells
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = self.tableView.dequeueReusableCell(withIdentifier: "ContactTypeCell", for: indexPath) as! ContactTypeTableViewCell
         guard let contactType = self.fetchController?.object(at: indexPath) else {
@@ -84,7 +88,7 @@ extension ContactTypesViewController: UITableViewDataSource {
 }
 
 extension ContactTypesViewController: UITableViewDelegate {
-    
+    // go to contacts view
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let viewController = storyboard.instantiateViewController(withIdentifier: "ContactViewController") as! ContactViewController
