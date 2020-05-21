@@ -1,7 +1,9 @@
 # Core data based contact app
 
 Written in Swift.
+
 Contains 3 entities.
+
 Person +---0< Contact >0---+ ContactType
 
 Features:
@@ -10,12 +12,13 @@ Features:
 * Contacts view for certain person
 * Contacts view for certain contact type
 
+
 iPhone 11 Pro Max - persons view | iPhone 11 Pro Max - adding a new person | iPhone 11 Pro Max - editing a person | iPhone 11 Pro Max - deleting a person
------------- | ------------- | -------------
+------------ | ------------- | ------------- | -------------
 <img src="Pictures/iPhone_11_pro_max_portrait_persons.jpg" height="550px"> | <img src="Pictures/iPhone_11_pro_max_portrait_adding_new_person.jpg" height="550px"> | <img src="Pictures/iPhone_11_pro_max_portrait_editing_person.jpg" height="550px"> | <img src="Pictures/iPhone_11_pro_max_portrait_confirmation_for_deletion.jpg" height="550px">
 
 iPhone 11 Pro Max - one person contacts view  | iPhone 11 Pro Max - adding contact for a person 
------------- | ------------- | -------------
+------------ | -------------
 <img src="Pictures/iPhone_11_pro_max_portrait_one_person_view.jpg" height="550px"> | <img src="Pictures/iPhone_11_pro_max_portrait_adding_contact_for_person.jpg" height="550px">
 
 
