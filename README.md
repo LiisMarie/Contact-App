@@ -15,7 +15,7 @@ Features:
 
 iPhone 11 Pro Max - persons view | iPhone 11 Pro Max - adding a new person | iPhone 11 Pro Max - editing a person | iPhone 11 Pro Max - deleting a person
 ------------ | ------------- | ------------- | -------------
-<img src="Pictures/iPhone_11_pro_max_portrait_persons.jpg" height="550px"> | <img src="Pictures/iPhone_11_pro_max_portrait_adding_new_person.jpg" height="550px"> | <img src="Pictures/iPhone_11_pro_max_portrait_editing_person.jpg" height="550px"> | <img src="Pictures/iPhone_11_pro_max_portrait_confirmation_for_deletion.jpg" height="550px">
+<img src="Pictures/iPhone_11_pro_max_portrait_persons.jpg" > | <img src="Pictures/iPhone_11_pro_max_portrait_adding_new_person.jpg" > | <img src="Pictures/iPhone_11_pro_max_portrait_editing_person.jpg" > | <img src="Pictures/iPhone_11_pro_max_portrait_confirmation_for_deletion.jpg">
 
 iPhone 11 Pro Max - one person contacts view  | iPhone 11 Pro Max - adding contact for a person 
 ------------ | -------------
@@ -24,7 +24,7 @@ iPhone 11 Pro Max - one person contacts view  | iPhone 11 Pro Max - adding conta
 
 iPhone 11 Pro Max - contact types view  | iPhone 11 Pro Max - contacts by contact type (phone) | iPhone 11 Pro Max -  adding contact for a contact type (phone)
 ------------ | ------------- | -------------
-<img src="Pictures/iPhone_11_pro_max_portrait_contact_types.jpg" height="550px"> | <img src="Pictures/iPhone_11_pro_max_portrait_contacts_by_contact_type.jpg" height="550px"> | <img src="Pictures/iPhone_11_pro_max_portrait_adding_contact_for_contact_type.jpg" height="550px">
+<img src="Pictures/iPhone_11_pro_max_portrait_contact_types.jpg" height="550px" width="300px"> | <img src="Pictures/iPhone_11_pro_max_portrait_contacts_by_contact_type.jpg" height="550px" width="300px"> | <img src="Pictures/iPhone_11_pro_max_portrait_adding_contact_for_contact_type.jpg" height="550px" width="300px">
 
 iPhone 11 Pro Max - contact types view in landscape  | iPhone 11 Pro Max - contacts by contact type (address) in landscape
 ------------ | -------------
