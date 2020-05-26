@@ -19,12 +19,12 @@ iPhone 11 Pro Max - persons view | iPhone 11 Pro Max - adding a new person | iPh
 
 iPhone 11 Pro Max - one person contacts view  | iPhone 11 Pro Max - adding contact for a person 
 ------------ | -------------
-<img src="Pictures/iPhone_11_pro_max_portrait_one_person_view.jpg" height="550px"> | <img src="Pictures/iPhone_11_pro_max_portrait_adding_contact_for_person.jpg" height="550px">
+<img src="Pictures/iPhone_11_pro_max_portrait_one_person_view.jpg" height="550px" width="270px"> | <img src="Pictures/iPhone_11_pro_max_portrait_adding_contact_for_person.jpg" height="550px" width="270px">
 
 
 iPhone 11 Pro Max - contact types view  | iPhone 11 Pro Max - contacts by contact type (phone) | iPhone 11 Pro Max -  adding contact for a contact type (phone)
 ------------ | ------------- | -------------
-<img src="Pictures/iPhone_11_pro_max_portrait_contact_types.jpg" height="550px" width="300px"> | <img src="Pictures/iPhone_11_pro_max_portrait_contacts_by_contact_type.jpg" height="550px" width="300px"> | <img src="Pictures/iPhone_11_pro_max_portrait_adding_contact_for_contact_type.jpg" height="550px" width="300px">
+<img src="Pictures/iPhone_11_pro_max_portrait_contact_types.jpg" height="550px" width="300px"> | <img src="Pictures/iPhone_11_pro_max_portrait_contacts_by_contact_type.jpg" height="550px" width="250px"> | <img src="Pictures/iPhone_11_pro_max_portrait_adding_contact_for_contact_type.jpg" height="550px" width="250px">
 
 iPhone 11 Pro Max - contact types view in landscape  | iPhone 11 Pro Max - contacts by contact type (address) in landscape
 ------------ | -------------
